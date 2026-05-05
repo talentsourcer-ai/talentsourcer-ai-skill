@@ -1,0 +1,24 @@
+{
+  "mustHaves": [
+    {
+      "requirement": "Has 5+ years of backend engineering experience",
+      "description": "Check job titles, role descriptions, and tenure across backend-focused engineering roles. Count roles involving APIs, databases, infrastructure, distributed systems, or server-side product development. Do not count purely frontend, QA, support, or IT administration roles unless backend ownership is explicit.",
+      "category": "workExperience",
+      "weight": 1
+    },
+    {
+      "requirement": "Has production TypeScript experience",
+      "description": "Look for TypeScript in skills, project descriptions, repository links, or recent engineering role responsibilities. Strong evidence includes TypeScript used in production services, APIs, Node.js backends, or full-stack applications.",
+      "category": "technical",
+      "weight": 1
+    }
+  ],
+  "niceToHaves": [
+    {
+      "requirement": "Has worked on AI-related products",
+      "description": "Look for AI, ML, LLM, MLOps, or model integration experience in product or platform teams. Strong evidence includes shipping AI features, integrating LLM APIs, building model evaluation workflows, or owning AI product infrastructure.",
+      "category": "industryExperience",
+      "weight": 1
+    }
+  ]
+}

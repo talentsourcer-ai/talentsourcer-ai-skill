@@ -1,0 +1,28 @@
+{
+  "steps": [
+    {
+      "stepOrder": 1,
+      "channel": "email",
+      "actionType": "email",
+      "language": "en",
+      "fallbackSubjectTemplate": "Quick question about {{roleTitle|the role}}",
+      "fallbackBodyTemplate": "Hi {{candidateFirstName|there}},\n\nI came across your profile and thought your background could be relevant for the {{roleTitle|role}} opportunity at {{roleCompany|our company}}. Would you be open to a short conversation?\n\n{{personaSignature|Best,}}",
+      "personalizationMode": "overrides_allowed",
+      "delayValue": 0,
+      "delayUnit": "hours",
+      "delayFrom": "previous_step_sent"
+    },
+    {
+      "stepOrder": 2,
+      "channel": "email",
+      "actionType": "email",
+      "language": "en",
+      "fallbackSubjectTemplate": "Following up",
+      "fallbackBodyTemplate": "Hi {{candidateFirstName|there}},\n\nJust following up in case my previous note got buried. Happy to send more context on the {{roleTitle|role}} if it sounds relevant.\n\n{{personaSignature|Best,}}",
+      "personalizationMode": "overrides_allowed",
+      "delayValue": 3,
+      "delayUnit": "days",
+      "delayFrom": "previous_step_sent"
+    }
+  ]
+}

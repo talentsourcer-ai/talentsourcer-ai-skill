@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "fullName": "Alex Morgan",
+      "title": "Senior Backend Engineer",
+      "currentEmployer": "Example Cloud",
+      "location": "Berlin, Germany",
+      "linkedinUrl": "https://www.linkedin.com/in/alex-morgan-example",
+      "email": "alex.morgan@example.com",
+      "notes": "Strong distributed systems background from agent-sourced profile.",
+      "resumeData": "Built high-volume event processing systems in TypeScript and Go. Led migration from monolith to services.",
+      "sourceProvider": "agent",
+      "sourceCandidateId": "alex-morgan-example"
+    }
+  ]
+}
