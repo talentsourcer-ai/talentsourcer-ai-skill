@@ -60,6 +60,20 @@ Then verify authentication:
 talentsourcer auth status --json
 ```
 
+Upgrade the CLI after a new release:
+
+```bash
+talentsourcer upgrade
+```
+
+Use `talentsourcer upgrade --yes` for non-interactive environments. In interactive terminals, `talentsourcer upgrade` offers to update the local agent skills by running the standard installer:
+
+```bash
+npx skills add talentsourcer-ai/talentsourcer-ai-skill
+```
+
+The skills installer asks which agents to install for and whether to install globally or for the current project.
+
 The user can create a personal access token in TalentSourcer AI settings under Personal Access Tokens. For project and briefing work, the token needs these scopes:
 
 - `projects:read`
@@ -146,6 +160,24 @@ talentsourcer searches add-candidates <searchId> \
 
 Adding candidates upserts global candidate profile fields, attaches candidates to the search, and stores organization-specific `notes` and `resumeData` for candidate checks. It does not automatically run candidate checks.
 
+Update organization-scoped private candidate context for an existing candidate:
+
+```bash
+talentsourcer candidates update-context <candidateId> \
+  --from-file candidate-context.json \
+  --json
+```
+
+Use this when an agent has already imported or identified a candidate and later finds additional ATS/recruiter context. This does not automatically run candidate checks; users should start candidate checks in the TalentSourcer UI when they are ready to spend credits.
+
+Private context guidance for agents:
+
+- `notes`: short recruiter/ATS context, ideally 3-8 role-relevant bullets. Use for call notes, motivation, availability, compensation expectations, dealbreakers, agency observations, and other non-public context that helps evaluate this role.
+- `resumeData`: concise factual CV/resume/ATS profile summary. Use for relevant work history, projects, skills, education, certifications, and ATS profile facts.
+- Do not paste raw ATS exports, full transcripts, email threads, or unrelated personal data. Summarize relevant evidence and keep it compact.
+- If an ATS MCP or private source is connected and the user asks to import or evaluate candidates, proactively include concise `notes` and/or `resumeData` when useful. If the private data is large or sensitive, ask whether to add a brief role-relevant summary first.
+- This context may be used as private candidate-check context only for BYOK candidate checks after the user starts checks in the UI.
+
 Candidate JSON contract:
 
 ```json
@@ -164,6 +196,15 @@ Candidate JSON contract:
       "sourceCandidateId": "alex-morgan-example"
     }
   ]
+}
+```
+
+Candidate context JSON contract:
+
+```json
+{
+  "notes": "- Open to Berlin hybrid roles\n- Prefers backend/platform work\n- Available after 4 weeks notice",
+  "resumeData": "Senior backend engineer with 7 years of Go and distributed systems experience. Built event-driven billing infrastructure at Example Cloud. BSc Computer Science."
 }
 ```
 
