@@ -319,10 +319,18 @@ List filtered shortlist candidates before enrollment:
 ```bash
 talentsourcer shortlists candidates <shortlistId> \
   --email-availability has_email \
+  --contact-data-availability has_contact_data \
   --campaign-presence not_in_campaign \
   --limit 50 \
   --json
 ```
+
+Useful shortlist candidate filters:
+
+- `--email-availability all|has_email|missing_email`: email campaign readiness.
+- `--contact-data-availability all|has_contact_data|no_contact_data`: enrichment/contact result. Use `no_contact_data` to find candidates where enrichment completed but no usable email or phone data was found.
+- `--campaign-presence all|in_campaign|not_in_campaign`: current campaign membership.
+- `--campaign-definition <campaignId>`: filter membership against a specific campaign.
 
 Enroll one filtered page from a shortlist into a draft campaign:
 
@@ -330,6 +338,7 @@ Enroll one filtered page from a shortlist into a draft campaign:
 talentsourcer campaigns enroll-shortlist <campaignId> \
   --shortlist <shortlistId> \
   --email-availability has_email \
+  --contact-data-availability has_contact_data \
   --campaign-presence not_in_campaign \
   --limit 50 \
   --json
