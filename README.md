@@ -2,7 +2,7 @@
 
 Agent skill for using TalentSourcer AI from AI coding agents such as Cursor, Codex, OpenCode, and similar tools.
 
-The skill teaches agents to use the TalentSourcer AI CLI safely for recruiting workflows including projects, briefings, candidate checks, shortlists, campaigns, analytics, and outreach tasks.
+The skill teaches agents to use the TalentSourcer AI CLI safely for recruiting workflows including projects, searches, candidate imports, candidate checks, shortlists, campaigns, analytics, and outreach tasks.
 
 ## Install
 

@@ -91,6 +91,8 @@ For search/candidate import work, the token also needs these scopes:
 - `campaigns:write`
 - `outreach_tasks:read`
 - `outreach_tasks:write`
+- `ats:read`
+- `ats:write`
 
 ## Project Commands
 
@@ -150,6 +152,25 @@ Get one search:
 talentsourcer searches get <searchId> --json
 ```
 
+Create a search:
+
+```bash
+talentsourcer searches create \
+  --project <projectId> \
+  --name "LinkedIn search" \
+  --description "Senior backend profiles from LinkedIn" \
+  --json
+```
+
+Update a search:
+
+```bash
+talentsourcer searches update <searchId> \
+  --name "Updated LinkedIn search" \
+  --description "Updated sourcing notes" \
+  --json
+```
+
 Add candidates to a search from JSON:
 
 ```bash
@@ -159,6 +180,33 @@ talentsourcer searches add-candidates <searchId> \
 ```
 
 Adding candidates upserts global candidate profile fields, attaches candidates to the search, and stores organization-specific `notes` and `resumeData` for candidate checks. It does not automatically run candidate checks.
+
+List candidates in a search before removing or auditing memberships:
+
+```bash
+talentsourcer searches candidates <searchId> \
+  --current-employer "Acme" \
+  --limit 50 \
+  --json
+```
+
+Remove candidates from a search by `searchCandidateId`:
+
+```bash
+talentsourcer searches remove-candidates <searchId> \
+  --from-file search-candidate-ids.json \
+  --json
+```
+
+Search candidate removal JSON:
+
+```json
+{
+  "searchCandidateIds": ["searchCandidateId1", "searchCandidateId2"]
+}
+```
+
+Removing candidates from a search only removes the search membership. It does not delete the global candidate profile.
 
 Update organization-scoped private candidate context for an existing candidate:
 
@@ -280,6 +328,33 @@ Input JSON:
 
 When moving candidates forward, prefer completed checks with category `A` or strong `B` unless the user gives different selection criteria. Do not shortlist failed, pending, or in-progress checks unless the user explicitly requests that behavior.
 
+Remove candidates from a shortlist by `shortlistCandidateId`:
+
+```bash
+talentsourcer shortlists remove-candidates <shortlistId> \
+  --from-file shortlist-candidate-ids.json \
+  --json
+```
+
+Move candidates from one shortlist to another shortlist in the same project:
+
+```bash
+talentsourcer shortlists move-candidates <sourceShortlistId> \
+  --target <targetShortlistId> \
+  --from-file shortlist-candidate-ids.json \
+  --json
+```
+
+Shortlist candidate ID JSON:
+
+```json
+{
+  "shortlistCandidateIds": ["shortlistCandidateId1", "shortlistCandidateId2"]
+}
+```
+
+For workflows like "move all candidates without an email to another shortlist", first run `talentsourcer shortlists candidates <shortlistId> --email-availability missing_email --json`, collect the returned `shortlistCandidateId` values, then call `shortlists move-candidates`.
+
 ## Campaign Commands
 
 List campaigns for a project:
@@ -355,6 +430,34 @@ talentsourcer campaigns analytics <campaignId> \
 ```
 
 Allowed analytics ranges are `7d`, `30d`, and `90d`. Use analytics to report enrollment status counts, reply rates, interested rates, connection acceptance rates, and daily trend data.
+
+List campaign candidates before removing enrollments:
+
+```bash
+talentsourcer campaigns candidates <campaignId> \
+  --current-employer "Acme" \
+  --status active \
+  --limit 50 \
+  --json
+```
+
+Remove candidates from a campaign by `campaignEnrollmentId`:
+
+```bash
+talentsourcer campaigns remove-candidates <campaignId> \
+  --from-file campaign-enrollment-ids.json \
+  --json
+```
+
+Campaign removal JSON:
+
+```json
+{
+  "campaignEnrollmentIds": ["campaignEnrollmentId1", "campaignEnrollmentId2"]
+}
+```
+
+Removing candidates from a campaign aborts their campaign enrollments. It does not delete candidate profiles or change shortlist/search membership.
 
 ## Outreach Task Commands
 
