@@ -748,7 +748,7 @@ Supported categories:
 
 Optional fields:
 
-- `weight`: numeric importance, default is `1`.
+- `weight`: integer importance from `1` to `10`, default is `1`. Never use decimals or normalized `0-1` scores.
 - `fulfilled`: usually omit; backend defaults to `false`.
 - `reasoning`: usually omit; backend defaults to empty string.
 - `confidence`: usually omit; backend defaults to `0`.
